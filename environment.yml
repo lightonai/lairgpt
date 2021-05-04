@@ -9,4 +9,4 @@ dependencies:
   - omegaconf=2.0
   - pytorch=1.8.1
   - tokenizers=0.10
-  - wget=3.2
+  - python-wget=3.2
