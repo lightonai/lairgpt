@@ -50,16 +50,15 @@ python main.py --size small --model_path path-to-model.pt \
 ```
 
 To generate text we rely on the `infer` method of the `TextGenerator` class that takes the usual parameters:
-- mode: (default: "nucleus")
-  - "greedy": always select the most likely word as its next word.
-  - "top-k":  filter to the K most likely next words and redistribute the probability mass among only those K next words.
-  - "nucleus": filter to the smallest possible set of words whose cumulative probability exceeds the probability `p` and redistribute the probability mass among this set of words.
-- temperature: a control over randomness. As this value approaches zero, the model becomes more deterministic. (default: 1.0)
-- k: size of the set of words to consider for "top-k" sampling (default: 5)
-- p: a control over diversity in nucleus sampling. A value of 0.5 means that half of the options are considered. (default: 0.9)
-- max_decoding_steps: number of tokens to generate. (default: 32)
-- skip_eos: when `True`, generation does not stop at end of sentence. (default:True)
-
+- `mode`: (default: `"nucleus"`)
+  - `"greedy"`: always select the most likely word as its next word.
+  - `"top-k"`:  filter to the K most likely next words and redistribute the probability mass among only those K next words.
+  - `"nucleus"`: filter to the smallest possible set of words whose cumulative probability exceeds the probability `p` and redistribute the probability mass among this set of words.
+- `temperature`: a control over randomness. As this value approaches zero, the model becomes more deterministic. (default: `1.0`)
+- `k`: size of the set of words to consider for "top-k" sampling (default: `5`)
+- `p`: a control over diversity in nucleus sampling. A value of 0.5 means that half of the options are considered. (default: `0.9`)
+- `max_decoding_steps`: number of tokens to generate. (default: `32`)
+- `skip_eos`: when `True`, generation does not stop at end of sentence. (default: `True`)
 
 ## <img src="_static/lighton_small.png"/> More on LightOn
 
