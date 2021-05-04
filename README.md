@@ -1,4 +1,4 @@
-# <img src="_static/lighton_small.png"/>LairGPT
+# <img src="https://cloud.lighton.ai/wp-content/uploads/2020/01/LightOnCloud.png" width=50/>LairGPT
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  [![Twitter](https://img.shields.io/twitter/follow/LightOnIO?style=social)](https://twitter.com/LightOnIO)
 
@@ -60,7 +60,7 @@ To generate text we rely on the `infer` method of the `TextGenerator` class that
 - `max_decoding_steps`: number of tokens to generate. (default: `32`)
 - `skip_eos`: when `True`, generation does not stop at end of sentence. (default: `True`)
 
-## <img src="_static/lighton_small.png"/> More on LightOn
+## <img src="https://cloud.lighton.ai/wp-content/uploads/2020/01/LightOnCloud.png" width=50/> More on LightOn
 
 LightOn is a company that produces hardware for machine learning.
 To lease a LightOn Appliance, please visit: https://lighton.ai/lighton-appliance/
