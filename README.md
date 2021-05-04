@@ -23,6 +23,7 @@ If you prefer control on your environment, the dependencies are
 omegaconf==2.0
 pytorch==1.8.1
 tokenizers==0.10
+wget==3.2
 ```
 
 ### pip
@@ -44,9 +45,7 @@ We include a demo script `main.py` in this repository that takes the path to mod
 To use it:
 
 ```
-python main.py --size small --model_path path-to-model.pt \
---tokenizer_path path-to-tokenizer.json \
---text "LightOn est une startup"
+python main.py --size large --text
 ```
 
 To generate text we rely on the `infer` method of the `TextGenerator` class that takes the usual parameters:
