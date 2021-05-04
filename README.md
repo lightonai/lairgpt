@@ -23,7 +23,7 @@ If you prefer control on your environment, the dependencies are
 omegaconf==2.0
 pytorch==1.8.1
 tokenizers==0.10
-wget==3.2
+python-wget==3.2
 ```
 
 ### pip
