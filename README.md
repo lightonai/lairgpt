@@ -1,32 +1,74 @@
-# <img src="_static/lighton_small.png" width=60/>Title
+# <img src="_static/lighton_small.png" width=60/>LairGPT
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  [![Twitter](https://img.shields.io/twitter/follow/LightOnIO?style=social)](https://twitter.com/LightOnIO)
 
-Descriptive Text - with hyperlink to the relevant paper/blog post
+A Python package in Pytorch by [LightOn AI Research](https://lair.lighton.ai/) that allows to perform inference
+with [PAGnol models](https://lair.lighton.ai/pagnol/).
+You can test the generation capabilities of PAGnol on our [interactive demo website](https://pagnol.lighton.ai/).
 
-**Remember to fill in the Description, Website and Topics of the repository.**
+## Install
 
-## Requirements
+### Requirements
 
-- Enter a list of requirements in the code environment, or point to the `requirements.txt` file
-- Give instructions on how to fetch the dataset, if needed
+The package is tested with Python 3.9. After cloning this repository, you can create a `conda` environment
+with the necessary dependencies from its root by
 
-## Reproducing our results
+```
+conda env create --file=environment.yml
+```
 
-- Give detailed instructions on how to run the code in order to replicate the results
+If you prefer control on your environment, the dependencies are
 
-## <img src="_static/lighton_cloud_small.png" width=120/> Access to Optical Processing Units
+```
+omegaconf==2.0
+pytorch==1.8.1
+tokenizers==0.10
+```
+
+### pip
+
+Simply run `pip install .` from the root of this repository.
+
+## Text generation
+
+The simplest way to generate text with PAGnol using `lairgpt` is
+
+```
+from lairgpt.models import PAGnol
+
+pagnol = PAGnol.small()
+pagnol("Salut PAGnol, comment ça va ?")
+```
+
+We include a demo script `main.py` in this repository that takes the path to models and tokenizers, and an input text, and generates sentences from it.
+To use it:
+
+```
+python main.py --size small --model_path path-to-model.pt \
+--tokenizer_path path-to-tokenizer.json \
+--text "LightOn est une startup"
+```
+
+To generate text we rely on the `infer` method of the `TextGenerator` class that takes the usual parameters:
+- mode: (default: "nucleus")
+  - "greedy": always select the most likely word as its next word.
+  - "top-k":  filter to the K most likely next words and redistribute the probability mass among only those K next words.
+  - "nucleus": filter to the smallest possible set of words whose cumulative probability exceeds the probability `p` and redistribute the probability mass among this set of words.
+- temperature: a control over randomness. As this value approaches zero, the model becomes more deterministic. (default: 1.0)
+- k: size of the set of words to consider for "top-k" sampling (default: 5)
+- p: a control over diversity in nucleus sampling. A value of 0.5 means that half of the options are considered. (default: 0.9)
+- max_decoding_steps: number of tokens to generate. (default: 32)
+- skip_eos: when `True`, generation does not stop at end of sentence. (default:True)
 
 
+## <img src="_static/lighton_cloud_small.png" width=120/> More on LightOn
+
+LightOn is a company that produces hardware for machine learning.
+To lease a LightOn Appliance, please visit: https://lighton.ai/lighton-appliance/
 
 To request access to LightOn Cloud and try our photonic co-processor, please visit: https://cloud.lighton.ai/
-
 For researchers, we also have a LightOn Cloud for Research program, please visit https://cloud.lighton.ai/lighton-research/ for more information.
 
-## Citation \[ OPTIONAL \]
+## Citation
 
-If you found this implementation useful in your research, please consider citing:
-<Bibtex for citation>
-
-## Hardware specs \[ OPTIONAL \]
-Give details on the hardware used. This is mandatory only if there are timing benchmarks in the repository.
+We will soon have a preprint on arXiv, stay tuned ;)
