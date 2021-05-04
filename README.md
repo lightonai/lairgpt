@@ -45,7 +45,7 @@ We include a demo script `main.py` in this repository that takes the path to mod
 To use it:
 
 ```
-python main.py --size large --text
+python main.py --size large --text "LightOn est une startup technologique"
 ```
 
 To generate text we rely on the `infer` method of the `TextGenerator` class that takes the usual parameters:
