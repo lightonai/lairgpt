@@ -1,4 +1,4 @@
-# <img src="_static/lighton_small.png" width=60/>LairGPT
+# <img src="_static/lighton_small.png"/>LairGPT
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  [![Twitter](https://img.shields.io/twitter/follow/LightOnIO?style=social)](https://twitter.com/LightOnIO)
 
@@ -61,7 +61,7 @@ To generate text we rely on the `infer` method of the `TextGenerator` class that
 - skip_eos: when `True`, generation does not stop at end of sentence. (default:True)
 
 
-## <img src="_static/lighton_cloud_small.png" width=120/> More on LightOn
+## <img src="_static/lighton_small.png"/> More on LightOn
 
 LightOn is a company that produces hardware for machine learning.
 To lease a LightOn Appliance, please visit: https://lighton.ai/lighton-appliance/
