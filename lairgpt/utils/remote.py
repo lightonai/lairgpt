@@ -5,9 +5,10 @@ import errno
 import shutil
 import socket
 import tarfile
+import logging
 import urllib.request
 
-
+logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
 local_dir = os.path.expanduser("~/.cache/lairgpt/")
 remote_dir = "https://download.lighton.ai/pagnol_ccnet/latest/"
 version_file = os.path.join(local_dir, "versions.json")
@@ -43,24 +44,32 @@ def load_asset(path, alt, resp=None):
             with urllib.request.urlopen(remote_dir + "versions.json") as remote_vers:
                 remote_hash = json.loads(remote_vers.read().decode())[filename]
         if local_hash == remote_hash != "" and os.path.isfile(dest):
-            print("Latest version of the " + alt + " available.")
+            logging.info("Latest version of the " + alt + " available.")
         else:
-            print("It seems you don't have the latest version of the " + alt + " on your local machine.")
-            if resp or resp is None and query_yes_no("Would you like to download it from LAIR repos?"):
+            logging.warn(
+                "It seems you don't have the latest version " + \
+                "of the " + alt + " on your local machine."
+            )
+            if resp or resp is None and query_yes_no(
+                    "Would you like to download the " + alt + " from LAIR repos?"
+            ):
                 try:
                     os.remove(dest)
                 except:
                     pass
                 dest = download_latest(filename)
             else:
-                print("Falling back to local version if available.")
+                logging.warn("Falling back to a local version if available.")
     else:
-        print("CAN'T CONNECT TO REMOTE HOST -- Cannot verify the lib's assets versions.")
+        logging.warn(
+            "CAN'T CONNECT TO REMOTE HOST -- Cannot verify the lib's assets versions."
+        )
 
     if not os.path.isfile(dest):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), dest)
 
     return dest
+
 
 def is_logged(filename, alt):
     """Utility to check versioning state of
@@ -79,17 +88,23 @@ def is_logged(filename, alt):
         True if versions.json exists already, False otherwise.
     """
     if not os.path.isfile(version_file):
-        print("CAN'T FIND LOCAL VERSIONING METADATA -- Cannot verify the lib's assets versions.")
+        logging.warn(
+            "VERSIONING METADATA NOT FOUND -- Cannot verify the" + \
+            "lib's assets versions.\n" + \
+            "Creating it at " + version_file
+        )
         with open(version_file, 'w') as outdump:
             json.dump({}, outdump)
-        print("Versions log created at " + version_file)
         return False
     else:
         with open(version_file) as versions:
             if not filename in json.load(versions):
-                print("The " + alt + "'s version is not stated in versioning metadata.")
+                logging.warn(
+                    "The " + alt + "'s version is not stated in versioning metadata."
+                )
                 return False
     return True
+
 
 def download_latest(filename):
     """Utility to download latest version of an asset file
@@ -110,10 +125,12 @@ def download_latest(filename):
     dest = os.path.join(local_dir, filename)
     os.makedirs(local_dir, exist_ok=True)
     wget.download(url, dest + ".tar.gz")
+
+    # extract |> remove archive
     with tarfile.open(dest + ".tar.gz", "r:gz") as tar:
         tar.extractall(local_dir)
     os.remove(dest + ".tar.gz")
-    print(" \nDownloaded at " + dest)
+    print("\nDownloaded at " + dest)
 
     # Update asset's hash in lib's cache versions
     versions = {}
@@ -125,6 +142,7 @@ def download_latest(filename):
     versions[filename] = remote_hash
     with open(version_file, 'w') as outdump:
         json.dump(versions, outdump)
+    logging.info("Cache versioning log updated at " + local_dir + "versions.json")
     return dest
 
 
