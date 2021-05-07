@@ -1,5 +1,5 @@
 import subprocess
-from pathlib import Path
+from os import path
 
 from setuptools import find_packages, setup
 
@@ -18,17 +18,17 @@ def version_from_git():
                                   check=True, stdout=subprocess.PIPE) \
         .stdout.decode("utf8").strip()
     t = git_describe.split("-")
-    # If we're exactly at the git tag, there's no "-" and return the full string
-    if len(t) == 1:
+    # If we're exactly at the git tag or after it
+    # by some commits, only return a solid version
+    if len(t) >= 1:
         return t[0]
-    # If not, the number after is the number of commits to the latest tag
-    if len(t) >= 2:
-        return t[0]+".post"+t[1]
     raise RuntimeError("Failed to parse git describe: " + git_describe)
 
 
 DESCRIPTION = "A Pytorch-based package by LightOn AI Research allowing to perform inference with PAGnol models."
-__here__ = Path(__file__).absolute().parent
+__here__ = path.abspath(path.dirname(__file__))
+with open(path.join(__here__, 'README.md'), encoding='utf-8') as f:
+    LONG_DESCRIPTION = f.read()
 
 setup(
     name="lairgpt",
@@ -37,7 +37,7 @@ setup(
     author_email="iacopo@lighton.io,julien@lighton.io,igor@lighton.io",
     url="https://github.com/lightonai/lairgpt",
     description=DESCRIPTION,
-    long_description=(__here__/"public"/"README.md"),
+    long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     classifiers=[
         # Trove classifiers
