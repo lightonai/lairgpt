@@ -51,5 +51,5 @@ setup(
         "License :: OSI Approved :: MIT License"
     ],
     packages=find_packages(exclude=["build", "dist", "examples", "test*"]),
-    install_requires=["pytorch==1.8.*", "omegaconf", "tokenizers", "python-wget"],
+    install_requires=["torch==1.8.*", "tokenizers", "wget"],
 )

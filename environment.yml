@@ -4,9 +4,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - pip=21.0.1
   - python=3.9.1
-  - omegaconf=2.0
   - pytorch=1.8.1
   - tokenizers=0.10
   - python-wget=3.2
