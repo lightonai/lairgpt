@@ -14,7 +14,7 @@ def version_from_git():
                       stdout=subprocess.PIPE).returncode != 0:
         return "0.0"
 
-    git_describe = subprocess.run("git describe --tags --match [0-9]*".split(" "),
+    git_describe = subprocess.run("git describe --tags --match v[0-9]*".split(" "),
                                   check=True, stdout=subprocess.PIPE) \
         .stdout.decode("utf8").strip()
     t = git_describe.split("-")
