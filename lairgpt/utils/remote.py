@@ -8,6 +8,18 @@ import tarfile
 import logging
 import urllib.request
 
+DISCLAIMER = (
+    "\nDISCLAIMER: PAGnol is made available under the MIT licence: "
+    "By downloading its models/assets, you agree with the terms of the licence agreement.\n"
+    "Under no circumstances will LightOn and/or Inria be held responsible or liable"
+    " in any way for any claims, damages, losses, expenses, costs or liabilities "
+    "whatsoever (including, without limitation, any direct or indirect damages for "
+    "loss of profits, business interruption or loss of information) resulting or "
+    "arising directly or indirectly from your use of or inability to use PAGnol.\n"
+    "Use judgement and discretion before deploying PAGnol: you are responsible for "
+    "using it thoughtfully and responsibly, in a way that benefits society.\n"
+)
+
 logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
 local_dir = os.path.expanduser("~/.cache/lairgpt/")
 remote_dir = "https://download.lighton.ai/pagnol_ccnet/latest/"
@@ -50,6 +62,12 @@ def load_asset(path, alt, resp=None):
                 "It seems you don't have the latest version " + \
                 "of the " + alt + " on your local machine."
             )
+
+            # Printing the License Disclaimer
+            # if downloading asset for te first time
+            if resp is None and not os.path.isfile(dest):
+                print(DISCLAIMER)
+
             if resp or resp is None and query_yes_no(
                     "Would you like to download the " + alt + " from LAIR repos?"
             ):
