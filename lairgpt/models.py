@@ -51,6 +51,11 @@ class PAGnol(TextGenerator):
         return pagnol
 
     @classmethod
+    def medium(cls):
+        pagnol = cls(Snapshot.MEDIUM.value, Tokenizer.CCNET.value, Config.MEDIUM.value)
+        return pagnol
+
+    @classmethod
     def large(cls):
         pagnol = cls(Snapshot.LARGE.value, Tokenizer.CCNET.value, Config.LARGE.value)
         return pagnol

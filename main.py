@@ -9,7 +9,9 @@ def main(args):
 
     if size == "small":
         pagnol = PAGnol.small()
-    if size == "large":
+    elif size == "medium":
+        pagnol = PAGnol.medium()
+    elif size == "large":
         pagnol = PAGnol.large()
 
     n_steps = 5

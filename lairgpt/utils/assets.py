@@ -13,9 +13,9 @@ class Config(Enum):
         "max_seq_len": 1024
     }
     MEDIUM = {
-        "d_model": 768,
-        "n_heads": 12,
-        "n_layers": 12,
+        "d_model": 1024,
+        "n_heads": 16,
+        "n_layers": 24,
         "vocab_size": 50262,
         "max_seq_len": 1024
     }
