@@ -68,4 +68,4 @@ For researchers, we also have a LightOn Cloud for Research program, please visit
 
 ## Citation
 
-We will soon have a preprint on arXiv, stay tuned ;)
+The preprint will be on arXiv soon, in the meantime, you can find it [here](https://github.com/lightonai/lairgpt/blob/master/paper-pagnol.pdf).
